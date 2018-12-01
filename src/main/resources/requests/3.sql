@@ -1,0 +1,3 @@
+SELECT SUM(SALARY)
+FROM developers
+WHERE SPECIALTY = 'Java';
