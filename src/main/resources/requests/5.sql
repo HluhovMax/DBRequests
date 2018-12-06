@@ -1,19 +1,8 @@
-SELECT COMPANY_NAME, CUSTOMER_NAME AS 'LOW_COST_CUSTOMER'
-FROM companies, customers
-WHERE companies.ID = 1 AND
-      customers.ID = 4
-
-UNION
-
-SELECT COMPANY_NAME, CUSTOMER_NAME
-FROM companies, customers
-WHERE companies.ID = 2 AND
-      customers.ID = 8
-
-UNION
-
-SELECT COMPANY_NAME, CUSTOMER_NAME
-FROM companies, customers
-WHERE companies.ID = 3 AND
-      customers.ID = 5;
-
+SELECT
+  companies.COMPANY_NAME  AS 'Company',
+  MIN(projects.COST) AS 'LOW_COST_PROJECT_PRICE',
+  customers.CUSTOMER_NAME
+FROM customers, companies
+  LEFT JOIN company_project ON companies.ID = company_project.company_id
+  LEFT JOIN projects ON projects.ID = company_project.project_id
+GROUP BY COMPANY_NAME DESC ;

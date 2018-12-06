@@ -1,8 +1,9 @@
-SELECT projects.PROJECT_NAME AS 'NAME_OF_PROJECT'
-FROM projects_developers
-  JOIN projects
-    ON projects_developers.PROJECT_ID = projects.ID
-WHERE projects_developers.DEVELOPER_ID =
-      (SELECT developers.ID
-       FROM developers
-       WHERE SALARY = 4500);
+SELECT
+    PROJECT_NAME,
+    SUM(SALARY)
+FROM developers
+    LEFT JOIN project_developer ON developers.ID = project_developer.developer_id
+    LEFT JOIN projects ON project_id = projects.ID
+GROUP BY PROJECT_NAME;
+
+
